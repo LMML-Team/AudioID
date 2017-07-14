@@ -10,6 +10,8 @@ from scipy.ndimage.morphology import iterate_structure
 from microphone import record_audio
 from microphone import play_audio
 
+import fingerprinting as fp
+
 song_data = {}
 song_text = open('workfile', 'rb+')
 
