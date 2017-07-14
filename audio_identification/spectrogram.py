@@ -8,7 +8,7 @@ def make_spectrogram(samples, fs=44100):
     Parameters
     -------------
     samples: np.array
-        samples from a given song, in array form
+        samples from a given song, in 1-D array form
     fs: int
         sampling rate of the samples
 
@@ -16,13 +16,13 @@ def make_spectrogram(samples, fs=44100):
     -------------
     data: np.array
         returns:
-            S:     the spectrogram, a 2D array of |c_k| values. Axis-0 (row) is the frequency, axis-1 (col) is the time
-            freqs: an array of frequency values, which allows you to correspond the axis-0 bins to actual frequencies
-            times: an array of timevalues, which allows you to correspond the axis-1 bins to actual times
+            spectro: the spectrogram, a 2D array of |c_k| values. Axis-0 (row) is the frequency, axis-1 (col) is the time
+            freqs:   an array of frequency values, which allows you to correspond the axis-0 bins to actual frequencies
+            times:   an array of timevalues, which allows you to correspond the axis-1 bins to actual times
     '''
 
-    S, freqs, times = mlab.specgram(samples, NFFT=4096, Fs=fs,
+    spectro, freqs, times = mlab.specgram(samples, NFFT=4096, Fs=fs,
                                     window=mlab.window_hanning,
                                     noverlap=(4096 // 2))
-    data = np.array([S, freqs, times])
+    data = np.array([spectro, freqs, times])
     return data
