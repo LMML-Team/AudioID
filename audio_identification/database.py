@@ -13,22 +13,30 @@ from microphone import play_audio
 
 import fingerprinting as fp
 
+#TODO: complete remove_song(song_name)
+
 song_data = {}
 
 
 def save() :
-    '''Saves song_data to a .txt file '''
+    '''
+    Saves song_data to a .pickle file
+    '''
     with open('song_data.pickle', 'wb') as f:
         pickle.dump(song_data, f, pickle.HIGHEST_PROTOCOL)
 
 
 def load() :
+    '''
+    Loads .pickle file and makes it to be readable in this syntax
+    '''
     with open('song_data.pickle', 'rb') as f:
         song_data = pickle.load(f)
 
 
 def new_song(song_path, sf=44100) :
-    '''Adds new song to database with song_name as key
+    '''
+    Adds new song to database with song_name as key
     and tuple of samples, sampling rate,
     (fingerprint dictionary -- to be implemented) and song_path as value.
 
@@ -45,7 +53,19 @@ def new_song(song_path, sf=44100) :
         samples, sf = librosa.load(song_path, sr=sf)
         song_data[song_name] = (samples, sf, song_path)
 
+def remove_song(song_name) :
+    '''
+    Removes specified song from database with song_name as key
+    
+    Parameters
+    -------------
+    song_name: song_object.key
+        string with song's name
+    '''
+    # TODO: figure out how to remove certain info from the pickle file
 
-def list_songs():
-    """Returns the list of song names as a np.array"""
+def list_songs() :
+    '''
+    Returns the list of song names as a np.array
+    '''
     return song_data.keys()
