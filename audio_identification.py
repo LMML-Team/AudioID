@@ -13,7 +13,8 @@ song_data = {}
 
 def new_song(song_path, sf=44100) :
     '''Adds new song to database with song_name as key
-    and tuple of samples, sampling rate, and song_path as value.
+    and tuple of samples, sampling rate,
+    (fingerprint dictionary -- to be added) and song_path as value.
 
     Parameters
     -------------
@@ -22,8 +23,9 @@ def new_song(song_path, sf=44100) :
     sf: int > 0
         sampling frequency of song (default = 44100)
     '''
-    samples, sf = librosa.load(song_path, sr=sf)
     song_name = song_path[-song_path[::-1].find("/") :
                           -song_path[::-1].find(".") - 1] if "/" in song_path
                           else song_pathsong_path[: -song_path[::-1].find(".") - 1]
-    song_data[song_name] = (samples, sf, song_path)
+    if song_name not in song_data :
+        samples, sf = librosa.load(song_path, sr=sf)
+        song_data[song_name] = (samples, sf, song_path)
