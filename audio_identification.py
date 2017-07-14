@@ -48,3 +48,8 @@ def record_song(time=10) :
     byte_encoded_signal, sr = record_audio(time)
     samples = np.hstack(tuple(np.fromstring(i, dtype=np.int16) for i in byte_encoded_signal))
     return samples
+
+
+def list_songs():
+    """Returns the list of song names as a np.array"""
+    return song_data.keys()
