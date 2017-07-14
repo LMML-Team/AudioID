@@ -22,12 +22,12 @@ def new_song(song_path, sf=44100) :
     '''
     song_write = open('database.txt', 'w')
     song_name = song_path[-song_path[::-1].find("/") :
-                          -song_path[::-1].find(".") - 1] if "/" in song_path else song_pathsong_path[: -song_path[::-1].find(".") - 1]
+                          -song_path[::-1].find(".") - 1] if "/" in song_path else song_path[: -song_path[::-1].find(".") - 1]
     string ="\""+ song_name + "\" ::: " # + function of the finger printing
     song_write.append(string)
-    
+
     song_write.close()
-    
+
     # the data for a song before fourier transformation
     song_data = {}
     if song_name not in song_data :
@@ -36,12 +36,12 @@ def new_song(song_path, sf=44100) :
 
 def remove_song(song_name):
     """
-    Removes specified song from 
-    
+    Removes specified song from
+
     Parameters
     --------------
     song_name: the name of the song
-    
+
     Returns
     --------------
     N/A
@@ -52,11 +52,11 @@ def remove_song(song_name):
 def list_songs():
     """
     Returns the list of songs as a np.array
-    
+
     Parameters
     --------------
     N/A
-    
+
     Returns
     --------------
     np.array: the list of song names

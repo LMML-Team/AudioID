@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import librosa
+import pickle
 
 from scipy.ndimage.filters import maximum_filter
 from scipy.ndimage.morphology import generate_binary_structure, binary_erosion
@@ -13,20 +14,18 @@ from microphone import play_audio
 import fingerprinting as fp
 
 song_data = {}
-song_text = open('workfile', 'rb+')
 
 
-def save():
-    '''Saves song_data to a .txt file and
+def save() :
+    '''Saves song_data to a .txt file '''
+    with open('song_data.pickle', 'wb') as f:
+        pickle.dump(song_data, f, pickle.HIGHEST_PROTOCOL)
 
-    Parameters
-    -------------
-    N/A
 
-    Return
-    -------------
-    N/A
-    '''
+def load() :
+    with open('song_data.pickle', 'rb') as f:
+        song_data = pickle.load(f)
+
 
 def new_song(song_path, sf=44100) :
     '''Adds new song to database with song_name as key
@@ -41,7 +40,7 @@ def new_song(song_path, sf=44100) :
         sampling frequency of song (default = 44100)
     '''
     song_name = song_path[-song_path[::-1].find("/") :
-                          -song_path[::-1].find(".") - 1] if "/" in song_path else song_pathsong_path[: -song_path[::-1].find(".") - 1]
+                          -song_path[::-1].find(".") - 1] if "/" in song_path else song_path[: -song_path[::-1].find(".") - 1]
     if song_name not in song_data :
         samples, sf = librosa.load(song_path, sr=sf)
         song_data[song_name] = (samples, sf, song_path)
