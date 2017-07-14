@@ -49,6 +49,20 @@ def remove_song(song_name):
     song_write = open('database.txt', 'w')
     song_close()
 
+def load():
+    """
+    Removes specified song from 
+    
+    Parameters
+    --------------
+    song_name: the name of the song
+    
+    Returns
+    --------------
+    N/A
+    """
+    pass
+
 def list_songs():
     """
     Returns the list of songs as a np.array
