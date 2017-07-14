@@ -10,6 +10,7 @@ from scipy.ndimage.morphology import iterate_structure
 from microphone import record_audio
 from microphone import play_audio
 
+
 def record_song(time=10) :
     '''Records song and converts samples from bits to python integers
 
@@ -25,7 +26,6 @@ def record_song(time=10) :
     '''
     byte_encoded_signal, sr = record_audio(time)
     samples = np.hstack(tuple(np.fromstring(i, dtype=np.int16) for i in byte_encoded_signal))
-    return samples
 
 
 def import_file(song_path, sf=44100) :
@@ -51,5 +51,3 @@ def import_file(song_path, sf=44100) :
     if song_name not in song_data :
         samples, sf = librosa.load(song_path, sr=sf)
         song_data[song_name] = (samples, sf)
-
-    return samples
