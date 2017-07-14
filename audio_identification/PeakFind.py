@@ -20,4 +20,5 @@ def peak_find(S):
 
     foreground = (S >= cutoff)
 
-    return np.logical_and(data == foreground, data == maximum_filter(data, neighborhood))
+    output = np.logical_and(data == foreground, data == maximum_filter(data, neighborhood)).T
+    return np.where(output)
