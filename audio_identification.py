@@ -11,7 +11,20 @@ from microphone import record_audio
 from microphone import play_audio
 
 song_data = {}
+song_text = open('workfile', 'rb+')
 
+def save():
+    '''Saves song_data to a .txt file and 
+
+    Parameters
+    -------------
+    N/A
+
+    Return
+    -------------
+    N/A
+    '''
+    
 
 def new_song(song_path, sf=44100) :
     '''Adds new song to database with song_name as key
