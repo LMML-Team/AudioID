@@ -13,8 +13,6 @@ from microphone import play_audio
 
 #TODO: complete remove_song(song_name)
 
-song_data = {}
-
 
 def save() :
     '''
@@ -24,32 +22,19 @@ def save() :
         pickle.dump(song_data, f, pickle.HIGHEST_PROTOCOL)
 
 
-def load() :
-    '''
-    Loads .pickle file and makes it to be readable in this syntax
-    '''
-    with open('song_data.pickle', 'rb') as f:
-        song_data = pickle.load(f)
-
-
-def new_song(song_path, sf=44100) :
+def new_song(song_name, fingerprint) :
     '''
     Adds new song to database with song_name as key
-    and tuple of samples, sampling rate,
-    (fingerprint dictionary -- to be implemented) and song_path as value.
+    fingerprint as value.
 
     Parameters
     -------------
     song_path: r"PATH"
         string with song's path
-    sf: int > 0
-        sampling frequency of song (default = 44100)
+    fingerprint: ---------
+        ----------------------
     '''
-    song_name = song_path[-song_path[::-1].find("/") :
-                          -song_path[::-1].find(".") - 1] if "/" in song_path else song_path[: -song_path[::-1].find(".") - 1]
-    if song_name not in song_data :
-        samples, sf = librosa.load(song_path, sr=sf)
-        song_data[song_name] = (samples, sf, song_path)
+
 
 def remove_song(song_name) :
     '''
