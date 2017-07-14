@@ -10,11 +10,14 @@ from scipy.ndimage.morphology import iterate_structure
 from microphone import record_audio
 from microphone import play_audio
 
+import fingerprinting as fp
+
 song_data = {}
 song_text = open('workfile', 'rb+')
 
+
 def save():
-    '''Saves song_data to a .txt file and 
+    '''Saves song_data to a .txt file and
 
     Parameters
     -------------
@@ -24,7 +27,6 @@ def save():
     -------------
     N/A
     '''
-    
 
 def new_song(song_path, sf=44100) :
     '''Adds new song to database with song_name as key
@@ -45,19 +47,6 @@ def new_song(song_path, sf=44100) :
         song_data[song_name] = (samples, sf, song_path)
 
 
-def record_song(time=10) :
-    '''Records song and converts samples from bits to python integers
-
-    Parameters
-    -------------
-    time: int
-        length of time to record audio (default = 10)
-
-    Return
-    -------------
-    samples: np.array, dtype = np.int16
-        array of audio samples as integers
-    '''
-    byte_encoded_signal, sr = record_audio(time)
-    samples = np.hstack(tuple(np.fromstring(i, dtype=np.int16) for i in byte_encoded_signal))
-    return samples
+def list_songs():
+    """Returns the list of song names as a np.array"""
+    return song_data.keys()
