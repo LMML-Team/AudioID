@@ -11,8 +11,6 @@ from scipy.ndimage.morphology import iterate_structure
 from microphone import record_audio
 from microphone import play_audio
 
-import fingerprinting as fp
-
 #TODO: complete remove_song(song_name)
 
 song_data = {}
@@ -56,7 +54,7 @@ def new_song(song_path, sf=44100) :
 def remove_song(song_name) :
     '''
     Removes specified song from database with song_name as key
-    
+
     Parameters
     -------------
     song_name: song_object.key

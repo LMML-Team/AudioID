@@ -10,8 +10,6 @@ from scipy.ndimage.morphology import iterate_structure
 from microphone import record_audio
 from microphone import play_audio
 
-import database as db
-import fingerprint as fp
 
 def record_song(time=10) :
     '''Records song and converts samples from bits to python integers
