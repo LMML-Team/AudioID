@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.mlab as mlab
 
+
 def make_spectrogram(samples, fs=44100):
-    '''
+    """
     Takes the samples from songs and converts them to a spectrogram
 
     Parameters
@@ -20,9 +21,9 @@ def make_spectrogram(samples, fs=44100):
         1D array of frequency values, which allows you to correspond the axis-0 bins to actual frequencies
     times:   np.array
         1D array of timevalues, which allows you to correspond the axis-1 bins to actual times
-    '''
+    """
 
     spectro, freqs, times = mlab.specgram(samples, NFFT=4096, Fs=fs,
-                                    window=mlab.window_hanning,
-                                    noverlap=(4096 // 2))
-    return spectro, freqs, times
+                                          window=mlab.window_hanning,
+                                          noverlap=(4096 // 2))
+    return {'spectro': spectro, 'f': freqs, 't': times}
