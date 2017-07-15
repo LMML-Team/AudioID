@@ -1,15 +1,4 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.mlab as mlab
-import librosa
 import pickle
-
-from scipy.ndimage.filters import maximum_filter
-from scipy.ndimage.morphology import generate_binary_structure, binary_erosion
-from scipy.ndimage.morphology import iterate_structure
-
-from microphone import record_audio
-from microphone import play_audio
 
 #TODO: complete remove_song(song_name)
 
@@ -82,7 +71,7 @@ def match_song(fingerprint) :
         name of song with best match
     '''
     matches = 0
-    best_match = set{}
+    best_match = set()
     for fp in iter(song_data) :
         if len(fp & fingerprint) > matches :
             matches = len(fp & fingerprint)
