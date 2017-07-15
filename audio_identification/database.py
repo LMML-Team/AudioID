@@ -14,7 +14,7 @@ from microphone import play_audio
 #TODO: complete remove_song(song_name)
 
 
-global song_data = {}
+song_data = {}
 
 
 def _load() :
