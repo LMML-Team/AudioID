@@ -10,7 +10,8 @@ from .database import _load
 from .database import _save
 from .database import song_data
 from .database import new_song
-# from fingerprinting import fingerprinting
+from .database import match_song
+from .SongFP import song_fp
 
 
 def record_song(time=10) :
@@ -23,15 +24,18 @@ def record_song(time=10) :
 
     Return
     -------------
-    samples: np.array, dtype = np.int16
-        array of audio samples as integers
+    best_match: str
+        name of song best matching recorded audio
     '''
     if not song_data:
         _load()
     byte_encoded_signal, sr = record_audio(time)
     samples = np.hstack(tuple(np.fromstring(i, dtype=np.int16) for i in byte_encoded_signal))
-    # calls fingerprinting function
-    # calls function to check fingerprint on database with fingerprint
+
+    fingerprint = song_fp(samples)
+    best_match = match_song(fingerprint)
+
+    return best_match
 
 
 def import_file(song_path, sf=44100) :
@@ -59,7 +63,7 @@ def import_file(song_path, sf=44100) :
     if song_name not in song_data :
         samples, sf = librosa.load(song_path, sr=sf)
 
-    # calls fingerprinting function
-    # calls new_song to store fingerprint in database
+    fingerprint = song_fp(samples)
+    new_song(song_name, fingerprint)
 
     _save()
