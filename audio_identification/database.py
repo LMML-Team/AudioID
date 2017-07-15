@@ -14,7 +14,18 @@ from microphone import play_audio
 #TODO: complete remove_song(song_name)
 
 
-def save() :
+global song_data = {}
+
+
+def _load() :
+    '''
+    Loads .pickle file and makes it to be readable in this syntax
+    '''
+    with open('song_data.pickle', 'rb') as f:
+        song_data = pickle.load(f)
+
+
+def _save() :
     '''
     Saves song_data to a .pickle file
     '''
@@ -34,6 +45,7 @@ def new_song(song_name, fingerprint) :
     fingerprint: ---------
         ----------------------
     '''
+    song_data[song_name] = fingerprint
 
 
 def remove_song(song_name) :
