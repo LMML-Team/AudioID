@@ -1,4 +1,5 @@
 import pickle
+import os.path
 
 #TODO: complete remove_song(song_name)
 
@@ -10,7 +11,7 @@ def _load() :
     '''
     Loads .pickle file and makes it to be readable in this syntax
     '''
-    with open('song_data.pickle', 'rb') as f:
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "song_data.pickle"), 'rb') as f:
         song_data = pickle.load(f)
 
 
@@ -18,7 +19,7 @@ def _save() :
     '''
     Saves song_data to a .pickle file
     '''
-    with open('song_data.pickle', 'wb') as f:
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "song_data.pickle"), 'wb') as f:
         pickle.dump(song_data, f, pickle.HIGHEST_PROTOCOL)
 
 

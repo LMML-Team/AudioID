@@ -11,7 +11,7 @@ from .database import _save
 from .database import song_data
 from .database import new_song
 from .database import match_song
-from .SongFP import song_fp
+from .fingerprinting import song_fp
 
 
 def record_song(time=10) :
@@ -58,8 +58,7 @@ def import_file(song_path, sf=44100) :
     '''
     if not song_data:
         _load()
-    song_name = song_path[-song_path[::-1].find("/") :
-                          -song_path[::-1].find(".") - 1] if "/" in song_path else song_path[: -song_path[::-1].find(".") - 1]
+    song_name = song_path[-song_path[::-1].find("/") : -song_path[::-1].find(".") - 1] if "/" in song_path else song_path[: -song_path[::-1].find(".") - 1]
     if song_name not in song_data :
         samples, sf = librosa.load(song_path, sr=sf)
 

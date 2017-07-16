@@ -20,7 +20,7 @@ def make_spectrogram(samples, fs=44100):
     freqs:   np.array
         1D array of frequency values, which allows you to correspond the axis-0 bins to actual frequencies
     times:   np.array
-        1D array of timevalues, which allows you to correspond the axis-1 bins to actual times
+        1D array of time values, which allows you to correspond the axis-1 bins to actual times
     """
 
     spectro, freqs, times = mlab.specgram(samples, NFFT=4096, Fs=fs,
