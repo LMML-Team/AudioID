@@ -1,21 +1,12 @@
 import pickle
 import os.path
 
-#TODO: complete remove_song(song_name)
-
-
 song_data = {}
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "song_data.pickle"), 'rb') as f:
+    song_data = pickle.load(f)
 
 
-def _load() :
-    '''
-    Loads .pickle file and makes it to be readable in this syntax
-    '''
-    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "song_data.pickle"), 'rb') as f:
-        song_data = pickle.load(f)
-
-
-def _save() :
+def save() :
     '''
     Saves song_data to a .pickle file
     '''
@@ -23,7 +14,7 @@ def _save() :
         pickle.dump(song_data, f, pickle.HIGHEST_PROTOCOL)
 
 
-def new_song(song_name, fingerprint) :
+def new_song(fingerprint, song_name, song_album, song_artist) :
     '''
     Adds new song to database with song_name as key
     fingerprint as value.
@@ -35,7 +26,7 @@ def new_song(song_name, fingerprint) :
     fingerprint: ---------
         ----------------------
     '''
-    song_data[fingerprint] = song_name
+    song_data[fingerprint] = (song_name, song_album, song_artist)
 
 
 def remove_song(song_name) :
@@ -72,7 +63,7 @@ def match_song(fingerprint) :
         name of song with best match
     '''
     matches = 0
-    best_match = set()
+    best_match = frozenset()
     for fp in iter(song_data) :
         if len(fp & fingerprint) > matches :
             matches = len(fp & fingerprint)

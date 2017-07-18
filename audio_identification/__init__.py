@@ -2,15 +2,12 @@
 
 import numpy as np
 import librosa
+import eyed3
 
 from microphone import record_audio
 # from microphone import play_audio
 
-from .database import _load
-from .database import _save
-from .database import song_data
-from .database import new_song
-from .database import match_song
+from .config import *
 from .fingerprinting import song_fp
 
 
@@ -27,8 +24,6 @@ def record_song(time=10) :
     best_match: str
         name of song best matching recorded audio
     '''
-    if not song_data:
-        _load()
     byte_encoded_signal, sr = record_audio(time)
     samples = np.hstack(tuple(np.fromstring(i, dtype=np.int16) for i in byte_encoded_signal))
 
@@ -56,13 +51,16 @@ def import_file(song_path, sf=44100) :
     sample: np.array
         array of song samples
     '''
-    if not song_data:
-        _load()
-    song_name = song_path[-song_path[::-1].find("/") : -song_path[::-1].find(".") - 1] if "/" in song_path else song_path[: -song_path[::-1].find(".") - 1]
-    if song_name not in song_data :
+    song_name = eyed3.load(song_path).tag.title
+    song_album = eyed3.load(song_path).tag.album
+    song_artist = eyed3.load(song_path).tag.artist
+
+    if (song_name, song_album, song_artist) not in song_data.values() :
         samples, sf = librosa.load(song_path, sr=sf)
 
-    fingerprint = song_fp(samples)
-    new_song(song_name, fingerprint)
+        fingerprint = song_fp(samples)
+        new_song(fingerprint, song_name, song_album, song_artist)
 
-    _save()
+        save()
+    else :
+        raise Exception("Song is already in database")
