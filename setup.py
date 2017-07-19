@@ -24,7 +24,7 @@ except ImportError:
 setup(name='audio_identification',
       version='1.0',
       description='Identifies audio samples',
-      author='Petar Griggs (@Anonymission)',
+      authors='Petar Griggs (@Anonymission), Michael Lai (@impostercafe), Amanda Wang (@CandyMandy28), Anthony Cavallaro (@QuantatativeFinancier)',
       author_email="marrs2k@gmail.com",
       packages=find_packages(),
       license="MIT"

@@ -1,9 +1,9 @@
 import pickle
 import os.path
 
-song_data = {}
-with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "song_data.pickle"), 'rb') as f:
-    song_data = pickle.load(f)
+song_data = ()
+#with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "song_data.pickle"), 'rb') as f:
+#    song_data = pickle.load(f)
 
 
 def save() :
@@ -26,7 +26,7 @@ def new_song(fingerprint, song_name, song_album, song_artist) :
     fingerprint: ---------
         ----------------------
     '''
-    song_data[fingerprint] = (song_name, song_album, song_artist)
+    song_data = (fingerprint, song_name, song_album, song_artist)
 
 
 def remove_song(song_name) :
@@ -63,11 +63,11 @@ def match_song(fingerprint) :
         name of song with best match
     '''
     matches = 0
-    best_match = frozenset()
+    best_match = tuple()
     for fp in iter(song_data) :
-        if len(fp & fingerprint) > matches :
+        if len(fp[0] & fingerprint) > matches :
             matches = len(fp & fingerprint)
             best_match = fp
 
     # add functionality to check if song is good match (based on number of matches)
-    return song_data[best_match]
+    return best_match[1:]
