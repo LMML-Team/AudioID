@@ -1,6 +1,9 @@
 # LMML-Team
-MIT BWSI 2017 Cognitive Assistant Collaboration
+This is a student group project for MIT Beaver Works Summer Institute 2017: Cognitive Assistant Collaboration.
 
-This is the part where we SHAZAM
+The project is designed to detect and record a sound from your designated microphone and identify the song that is playing based on the database.
 
-## AAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH
+# Setup
+Install these packages and follow the instructions as stated.
+
+# Functions
