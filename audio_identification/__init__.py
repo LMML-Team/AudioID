@@ -33,7 +33,7 @@ def record_song(time=10) :
     return best_match
 
 
-def import_file(song_path, sf=44100) :
+def import_song_file(song_path, sf=44100) :
     '''
     Adds new song to database with song_name as key
     and tuple of samples, sampling rate,
