@@ -5,4 +5,11 @@ The project is designed to detect and record a sound from your designated microp
 # Setup
 Install these packages and follow the instructions as stated.
 
+Clone this repository.
+Open the folder of the cloned repository in Command Prompt.
+Enter this command:
+```shell
+python setup.py develop
+```
+
 # Functions
