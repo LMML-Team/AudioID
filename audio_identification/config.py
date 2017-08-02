@@ -45,7 +45,7 @@ def list_songs() :
     '''
     Returns the list of song names as a np.array
     '''
-    return song_data.keys()
+    return song_data.values()
 
 
 def match_song(fingerprint) :
