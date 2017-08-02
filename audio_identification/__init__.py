@@ -55,11 +55,11 @@ def import_song_file(song_path, sf=44100) :
     song_album = eyed3.load(song_path).tag.album
     song_artist = eyed3.load(song_path).tag.artist
 
-    # if (song_name, song_album, song_artist) not in song_data.values() :
-    samples, sf = librosa.load(song_path, sr=sf)
-    fingerprint = song_fp(samples)
-    new_song(fingerprint, song_name, song_album, song_artist)
+    if (song_name, song_album, song_artist) not in list_songs() :
+        samples, sf = librosa.load(song_path, sr=sf)
+        fingerprint = song_fp(samples)
+        new_song(fingerprint, song_name, song_album, song_artist)
 
-    save()
-    # else :
-    #    raise Exception("Song is already in database")
+        save()
+    else :
+        raise Exception("Song is already in database")

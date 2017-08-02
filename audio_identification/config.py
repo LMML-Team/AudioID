@@ -46,7 +46,9 @@ def list_songs() :
     '''
     Returns the list of song names as a np.array
     '''
-    return song_data[:][1:]
+    unzipped = list(zip(*song_data))
+    zipped = list(zip(*unzipped[1:]))
+    return zipped
 
 
 def match_song(fingerprint) :
@@ -64,5 +66,6 @@ def match_song(fingerprint) :
         name of song with best match
     '''
     best_match = max(song_data, key=lambda x: len(x[0] & fingerprint))
+    print(len(best_match[0] & fingerprint))
     # add functionality to check if song is good match (based on number of matches)
     return best_match[1:]

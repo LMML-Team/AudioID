@@ -22,9 +22,10 @@ def song_fp(samples):
     times = peaks['t']
 
     fingerprints = set()
-
     for n, ft1 in enumerate(zip(indices[0], indices[1])) :
         for f2, t2 in zip(indices[0][min(n + 1, len(indices[0] - 1)) : min(n + 20, len(indices[0]))], indices[1][min(n + 1, len(indices[1] - 1)) : min(n + 20, len(indices[1]))]) :
             fingerprints.add((ft1[0], f2, t2 - ft1[1]))
 
-    return frozenset(fingerprints)
+    return fingerprints
+
+    return frozenset(fp_indices(indices))
