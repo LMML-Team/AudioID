@@ -21,7 +21,6 @@ def peak_find(samples):
     '''
     spectro_output = make_spectrogram(samples)
     s = spectro_output['spectro']
-
     struct = generate_binary_structure(2, 1)
     neighborhood = iterate_structure(struct, 20)
 
@@ -31,4 +30,4 @@ def peak_find(samples):
     cutoff = xs[np.searchsorted(cdf, 0.77)]
 
     output = np.logical_and(s >= cutoff, s == maximum_filter(s, footprint=neighborhood)).T
-    return {'indices': np.where(output), 'f': spectro_output['f'], 't': spectro_output['t']}
+    return {'indices': np.where(output.T), 'f': spectro_output['f'], 't': spectro_output['t']}

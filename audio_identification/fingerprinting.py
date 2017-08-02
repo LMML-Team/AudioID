@@ -26,6 +26,4 @@ def song_fp(samples):
         for f2, t2 in zip(indices[0][min(n + 1, len(indices[0] - 1)) : min(n + 20, len(indices[0]))], indices[1][min(n + 1, len(indices[1] - 1)) : min(n + 20, len(indices[1]))]) :
             fingerprints.add((ft1[0], f2, t2 - ft1[1]))
 
-    return fingerprints
-
-    return frozenset(fp_indices(indices))
+    return frozenset(fingerprints)
