@@ -39,7 +39,9 @@ def remove_song(song_name) :
     song_name: song_object.key
         string with song's name
     '''
-    # TODO: figure out how to remove certain info from the pickle file
+    global song_data
+    song_data = tuple(list(x for x in song_data if x[1] != song_name))
+    save()
 
 
 def list_songs() :
@@ -66,6 +68,16 @@ def match_song(fingerprint) :
         name of song with best match
     '''
     best_match = max(song_data, key=lambda x: len(x[0] & fingerprint))
-    print(len(best_match[0] & fingerprint))
+    num_matches = len(best_match[0] & fingerprint)
+
+    if num_matches >= 30:
+        str_match = "Strong match"
+    elif num_matches >= 20:
+        str_match ="Good match"
+    elif num_matches >= 10:
+        str_match = "Weak match"
+    else:
+        str_match = "No match"
+
     # add functionality to check if song is good match (based on number of matches)
-    return best_match[1:]
+    return best_match[1:], str_match

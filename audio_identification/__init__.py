@@ -28,9 +28,9 @@ def record_song(time=10) :
     samples = np.hstack(tuple(np.fromstring(i, dtype=np.int16) for i in byte_encoded_signal))
 
     fingerprint = song_fp(samples)
-    best_match = match_song(fingerprint)
+    best_match, str_match = match_song(fingerprint)
 
-    return best_match
+    return best_match, str_match
 
 
 def import_song_file(song_path, sf=44100) :
