@@ -19,8 +19,8 @@ def song_fp(samples):
     t, f = peak_find(samples)
 
     fingerprints = set()
-    for n, t1 in enumerate(t) :
-        for j, t2 in t[min(n + 1, len(indices[0] - 1) : min(n + 20, len(indices[0]))] :
+    for n, t1 in enumerate(t):
+        for j, t2 in t[min(n + 1, len(t[0] - 1)): min(n + 20, len(t[0]))]:
             fingerprints.add((f[n], f[n + j + 1], t2 - t1))
 
     return frozenset(fingerprints)
