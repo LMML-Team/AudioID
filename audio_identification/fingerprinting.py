@@ -1,22 +1,24 @@
 from .peak_find import peak_find
 
 
-def song_fp(samples):
+def song_fp(samples, prnt_spectro=False):
     """
     Takes samples from songs, uses peaks to calculate fingerprints
 
     Parameters
-    -------------
-    samples: Song sample data. Used in peak_find()
+    -----------
+    samples: song sample data. Used in peak_find()
+        ndarray of song sample data
+    prnt_spectro: boolean (default = False)
+        whether a spectrogram of the song should be shown on screen
 
     Return
-    -------------
+    -------
     fingerprints: A set of tuples containing (f1, f2, dt).
-    Gives relationships between frequencies and times of concurrent peaks in song data
-
+        gives relationships between frequencies and times of concurrent peaks in song data
     """
 
-    t, f = peak_find(samples)
+    t, f = peak_find(samples, prnt_spectro)
 
     fingerprints = set()
     for n, t1 in enumerate(t) :

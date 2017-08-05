@@ -4,22 +4,31 @@ from scipy.ndimage.morphology import iterate_structure
 
 import numpy as np
 from .spectrogram import make_spectrogram
+from .graph_spectrogram import print_spectro
 
 
-def peak_find(samples):
+def peak_find(samples, prnt_spectro=False):
     '''
     Finds peak values of given sample data
 
-    Parameter(s)
-    -------------
-    samples: song sample data for peaks to be found in.
+    Parameters
+    -----------
+    samples: ndarray
+        song sample data for peaks to be found in
+    prnt_spectro: boolean (default = False)
+        whether a spectrogram of the song should be shown on screen
 
     Returns
-    -------------
-    Boolean np.ndarray with true values at peaks, false values at non-peaks
-
+    --------
+    times: ndarray
+        indices of peak times
+    freqs: ndarray
+        indices of peak frequencies
     '''
     s, f, t = make_spectrogram(samples)
+    if prnt_spectro:
+        print_spectro(s, f, t)
+
     struct = generate_binary_structure(2, 1)
     neighborhood = iterate_structure(struct, 20)
 
