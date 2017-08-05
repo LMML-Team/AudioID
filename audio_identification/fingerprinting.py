@@ -16,14 +16,11 @@ def song_fp(samples):
 
     """
 
-    peaks = peak_find(samples)
-    indices = peaks['indices']
-    frequencies = peaks['f']
-    times = peaks['t']
+    t, f = peak_find(samples)
 
     fingerprints = set()
-    for n, ft1 in enumerate(zip(indices[0], indices[1])) :
-        for f2, t2 in zip(indices[0][min(n + 1, len(indices[0] - 1)) : min(n + 20, len(indices[0]))], indices[1][min(n + 1, len(indices[1] - 1)) : min(n + 20, len(indices[1]))]) :
-            fingerprints.add((ft1[0], f2, t2 - ft1[1]))
+    for n, t1 in enumerate(t) :
+        for j, t2 in t[min(n + 1, len(indices[0] - 1) : min(n + 20, len(indices[0]))] :
+            fingerprints.add((f[n], f[n + j + 1], t2 - t1))
 
     return frozenset(fingerprints)
