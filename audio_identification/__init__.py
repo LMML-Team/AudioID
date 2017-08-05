@@ -30,7 +30,10 @@ def record_song(time=10) :
     fingerprint = song_fp(samples)
     best_match, str_match = match_song(fingerprint)
 
-    return best_match, str_match
+    #return "{} by {} from {} is detected as a {}".format(best_match[0], best_match[1], best_match[2], str_match)
+    song_name, album, singer = best_match
+    return song_name, album, singer, str_match
+
 
 
 def import_song_file(song_path, sf=44100) :
