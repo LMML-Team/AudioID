@@ -23,7 +23,7 @@ def peak_find(samples):
     struct = generate_binary_structure(2, 1)
     neighborhood = iterate_structure(struct, 20)
 
-    ys, xs = np.histogram(s.flatten(), bins=len(f * t) // 2, normed=True)
+    ys, xs = np.histogram(s.flatten(), bins=len(f) * len(t) // 2, normed=True)
     dx = xs[-1] - xs[-2]
     cdf = np.cumsum(ys) * dx
     cutoff = xs[np.searchsorted(cdf, 0.77)]
