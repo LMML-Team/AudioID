@@ -26,12 +26,16 @@ def make_spectrogram(samples, prnt_spectro=False, fs=44100):
         1D array of time values, which allows you to correspond the axis-1 bins to actual times
     """
 
-    fig = plt.subplots()
     spectro, freqs, times = mlab.specgram(samples, NFFT=4096, Fs=fs,
                                           window=mlab.window_hanning,
                                           noverlap=(4096 // 2))
+
     if prnt_spectro:
-        plt.imshow(spectro)
+        fig, ax = plt.subplots()
+        S, freqs, bins, im = ax.specgram(samples, NFFT=4096, Fs=fs,
+                                         window=mlab.window_hanning,
+                                         noverlap=4096 // 2)
+        fig.colorbar(im)
         plt.show()
 
     return spectro, freqs, times
