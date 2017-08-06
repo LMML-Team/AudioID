@@ -4,7 +4,6 @@ from scipy.ndimage.morphology import iterate_structure
 
 import numpy as np
 from .spectrogram import make_spectrogram
-from .graph_spectrogram import print_spectro
 
 
 def peak_find(samples, prnt_spectro=False):
@@ -25,9 +24,7 @@ def peak_find(samples, prnt_spectro=False):
     freqs: ndarray
         indices of peak frequencies
     '''
-    s, f, t = make_spectrogram(samples)
-    if prnt_spectro:
-        print_spectro(s, f, t)
+    s, f, t = make_spectrogram(samples, prnt_spectro)
 
     struct = generate_binary_structure(2, 1)
     neighborhood = iterate_structure(struct, 20)

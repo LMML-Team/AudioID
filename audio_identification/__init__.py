@@ -7,7 +7,6 @@ from microphone import record_audio
 
 from .config import *
 from .fingerprinting import song_fp
-from .graph_spectrogram import print_spectro
 
 
 def record_song(time=10, prnt_spectro=False) :
@@ -37,7 +36,7 @@ def record_song(time=10, prnt_spectro=False) :
 
 
 
-def import_song_file(song_path, sf=44100) :
+def import_song_file(song_path, prnt_spectro=False, sf=44100) :
     """
     Adds new song to database
 
@@ -45,8 +44,10 @@ def import_song_file(song_path, sf=44100) :
     -----------
     song_path: r"PATH"
         string with song's path
-    sf: int > 0
-        sampling frequency of song (default = 44100)
+    prnt_spectro: boolean (default = False)
+        whether a spectrogram of the song should be shown on screen
+    sf: int > 0 (default = 44100)
+        sampling frequency of song
 
     Return
     -------
@@ -59,7 +60,7 @@ def import_song_file(song_path, sf=44100) :
 
     if (song_name, song_album, song_artist) not in list_songs() :
         samples, sf = librosa.load(song_path, sr=sf)
-        fingerprint = song_fp(samples)
+        fingerprint = song_fp(samples, prnt_spectro)
         new_song(fingerprint, song_name, song_album, song_artist)
 
         save()
